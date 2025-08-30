@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    boolean existsById(long id);
-    Optional<Transaction> findById(long id);
+    Optional<Transaction> findBySenderId(long senderId);
+    Optional<Transaction> findByReceiverId(long receiverId);
 }
