@@ -4,6 +4,7 @@ import com.desafio_banco.contaBancaria.domains.User;
 import com.desafio_banco.contaBancaria.domains.UserType;
 import com.desafio_banco.contaBancaria.dto.UserDTO;
 import com.desafio_banco.contaBancaria.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class UserService {
     }
 
     public User getUserById(long id) throws Exception {
-        return userRepository.findById(id).orElseThrow(() -> new Exception("Usuário não encontrado."));
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado."));
     }
 
     public List<User> getAllUsers() {
