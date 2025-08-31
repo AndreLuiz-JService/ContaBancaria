@@ -5,10 +5,12 @@ import com.desafio_banco.contaBancaria.domains.UserType;
 import com.desafio_banco.contaBancaria.dto.UserDTO;
 import com.desafio_banco.contaBancaria.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;

@@ -7,11 +7,13 @@ import com.desafio_banco.contaBancaria.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@Service
 public class TransactionService {
     @Autowired
     private TransactionRepository repository;
@@ -23,6 +25,7 @@ public class TransactionService {
     private RestTemplate externalService;
 
     public Transaction createTransaction(TransactionDTO data) throws Exception {
+        System.out.println("Creating transaction: " + data);
         User sender = userService.getUserById(data.senderId());
         User receiver = userService.getUserById(data.receiverId());
 
