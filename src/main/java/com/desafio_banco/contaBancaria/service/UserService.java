@@ -7,6 +7,7 @@ import com.desafio_banco.contaBancaria.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class UserService {
     @Autowired
@@ -18,7 +19,7 @@ public class UserService {
         }
 
         BigDecimal newBalance = sender.getBalance().subtract(amount);
-        
+
         if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             throw new Exception("Saldo insuficiente para realizar a transferência.");
         }
@@ -26,6 +27,10 @@ public class UserService {
 
     public User getUserById(long id) throws Exception {
         return userRepository.findById(id).orElseThrow(() -> new Exception("Usuário não encontrado."));
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
     }
 
     public User createUser(UserDTO data) {
