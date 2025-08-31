@@ -22,7 +22,7 @@ public class TransactionService {
     private UserService userService;
 
     @Autowired
-    private RestTemplate externalService;
+    private RestService restService;
 
     public Transaction createTransaction(TransactionDTO data) throws Exception {
         System.out.println("Creating transaction: " + data);
@@ -52,14 +52,12 @@ public class TransactionService {
     }
 
     public boolean authorizeTransaction() throws Exception {
-        ResponseEntity<Map> response = externalService.getForEntity(
-                "https://util.devi.tools/api/v2/authorize",
-                Map.class
-        );
+        ResponseEntity<Map> response = restService.get("https://util.devi.tools/api/v2/authorize");
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new Exception("Erro ao se comunicar com o serviço externo.");
         }
+
 
         Map<String, Object> body = response.getBody();
         if (body == null || !body.containsKey("data")) {
